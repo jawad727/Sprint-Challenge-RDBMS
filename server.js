@@ -1,7 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
 
-// const recipeRouter = require('./routes/recipeBook-router.js')
+const ProjectTrackerDB = require('./routers/project-tracker-router')
 
 const server = express();
 
@@ -17,7 +17,8 @@ server.get('/', (req, res) => {
 })
 
 //Routes
-// server.use('/api/recipes', recipeRouter)
+
+server.use('/api', ProjectTrackerDB)
 
 
 module.exports = server;
