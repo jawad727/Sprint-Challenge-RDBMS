@@ -8,11 +8,28 @@ router.get('/project/:id', (req, res) => {
 
     ptDB
     .getById(id)
-    .then(item => {
-        res.status(200).json(item)
+
+    .then(project => {
+
+        if (project) {
+            ptDB
+            .getActionById(id)
+            .then( actionsArray => {
+                
+                res.status(200).json({...project, actions: actionsArray})
+            } )
+
+
+        
+    } else {
+            res.status(404).json({
+                error: 'Enter a valid id'
+            })
+        }
+
     })
     .catch(error => {
-        res.status(400).json({
+        res.status(500).json({
             error: 'Couldnt Get by id'
         })
     })
@@ -27,7 +44,7 @@ router.post('/project', (req, res) => {
     .addProjects(projectbod)
 
     .then(dish => {
-        res.status(201).json(projectbod)
+        res.status(201).json(dish)
     })
     .catch(error => {
         res.status(400).json({

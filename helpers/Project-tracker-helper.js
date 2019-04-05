@@ -1,30 +1,22 @@
 const knex = require('knex')
 
-const knexConfig = {
-   client: 'sqlite3',
-   connection: {
-       filename: './data/projectTracker.sqlite3'
-   },
-   useNullAsDefault: true
-};
+const knexConfig =require('../knexfile.js')
 
-const db = knex(knexConfig);
+const db = knex(knexConfig.development);
 
 module.exports = {
     addProjects,
     addActions,
     getById,
-    get
+    getActionById
 };
 
-function get() {
-  return db('actions')
+function getActionById(id) {
+  return db('actions').where({ project_id: id }) //sends back array
 }
 
 function getById(id) {
-    return db('projects', 'actions')
-    .where({ id })
-    .first()
+    return db('projects').where({ id }).first()
 }
 
 

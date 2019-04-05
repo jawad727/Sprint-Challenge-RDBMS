@@ -1,8 +1,8 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('projects').insert([
-    { action_description: 'lorem psum', isCompleted: false},
-    { action_description: 'lorem psum', isCompleted: false}
+  return knex('actions').insert([
+    { action_description: 'lorem psum', isCompleted: false, project_id: 1},
+    { action_description: 'lorem psum', isCompleted: false, project_id: 2}
     ]);
  
  
